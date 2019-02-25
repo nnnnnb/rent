@@ -1,0 +1,70 @@
+1、创建项目
+django-admin startproject 项目名称
+
+2、创建应用
+python3 manage.py startapp 应用名
+
+3、启动服务器
+python3 manage.py runserver
+
+4、创建管理员
+python3 manage.py createsuperuser
+
+LANGUAGE_CODE = 'zh-hans' #使用中国语言
+TIME_ZONE = 'Asia/Shanghai' #使用中国上海时间
+
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+apps __init__.py
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
+mysql -uroot -p myproject < myproject/apply_block.sql;
+
+
+
+上传图片：
+	# settings.py
+	MEDIA_ROOT = BASE_DIR    #os.path.join(BASE_DIR, 'media')
+	MEDIA_URL = '/media/'
+
+	# url.py
+	from .settings import MEDIA_ROOT
+	from django.views.static import serve
+	urlpatterns = [
+	    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
+	]
+
+	# models.py
+	imgurl = models.ImageField(upload_to='media/images/facilities', null = True, blank = True, verbose_name='图片路径')
+
+
+使用富文本编辑器：
+	pip3 install django-ckeditor
+	pip3 install pillow
+
+	# settings.py
+	INSTALLED_APPS = [
+	    'ckeditor',
+	    'ckeditor_uploader',
+	]
+
+	MEDIA_ROOT = BASE_DIR    #os.path.join(BASE_DIR, 'media')
+	MEDIA_URL = '/media/'
+	CKEDITOR_UPLOAD_PATH = 'upload/'
+	CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+
+	# url.py
+	from .settings import MEDIA_ROOT
+	from django.views.static import serve
+	urlpatterns = [
+	    url(r'', include('ckeditor_uploader.urls'),{"document_root": MEDIA_ROOT}),
+	]
+
+	# models.py
+	from ckeditor_uploader.fields import RichTextUploadingField
+	content = RichTextUploadingField(verbose_name='正文')

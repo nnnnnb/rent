@@ -1,0 +1,100 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{{data.title}}</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/media/static/css/life.css">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+
+
+<div class="main">
+    <div class="tit"><a href="{% url 'index' %}">首页</a>&nbsp;&gt;&nbsp;<a href="{% url 'life' %}">成都租房生活</a>&nbsp;&gt;&nbsp;<a href="">一盏灯麻辣烫，经常摸黑吃，第1次去一定点干拌！</a></div>
+    <div class="content article">
+        <div class="left lefts-box">
+            <div class="article-box">
+                <div class="new-title">{{data.title}}</div>
+                <div class="datetime">{{data.create_time}}</div>
+                <div class="text">{{data.content|safe}}</div>
+            </div>
+
+            <!-- <div class="comment-box">
+                <div class="con-box">
+                    <textarea id="content"></textarea>
+                    <div class="btn-box">
+                        <div class="right">
+                            <label><input type="checkbox" name="anonymity">匿名</label>
+                            <div id="btn">评论</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="reply-box">
+                    <div class="reply-top">
+                        <div class="left">匿名用户</div>
+                        <div class="right">2018-11-19 12:00:00</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="text">评论内容</div>
+                    <div class="reply-close">删除</div>
+                </div>
+                <div class="reply-box">
+                    <div class="reply-top">
+                        <div class="left">用户</div>
+                        <div class="right">2018-11-19 12:00:00</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="text">评论内容</div>
+                    <div class="reply-close">删除</div>
+                </div>
+                <div class="reply-box">
+                    <div class="reply-top">
+                        <div class="left">匿名用户</div>
+                        <div class="right">2018-11-19 12:00:00</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="text">评论内容</div>
+                </div>
+
+            </div> -->
+
+        </div>
+
+        <div class="right right-box">
+            <div class="new">
+                <div class="tits">热门文章</div>
+                {% for d in reclife %}
+                <a href="{% url 'lifetext' %}?key={{d.id}}">
+                    <div class="txt-box">
+                        <div class="img-box">
+                            <div class="img">
+                                <img src="/media/{{d.imgurl}}" alt="">
+                                <span>{{forloop.counter}}</span>
+                            </div>
+                        </div>
+                        <div class="txt">{{d.title}}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+</body>
+
+<script type="text/javascript" src="/media/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".lefts-box .text table").css({'width': '660px'});
+    $(".lefts-box .text img").css({'max-width': '660px'});
+    $(".lefts-box .text *").css({'font-size': '14px',"line-height":"2"});
+</script>
+</html>

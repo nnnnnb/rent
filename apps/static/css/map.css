@@ -1,0 +1,74 @@
+*{ margin: 0;padding: 0 }
+.left{ float: left }
+.right{ float: right }
+.clear{ clear: both }
+
+::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+    background-color: #ededed;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ededed;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #666464;
+}
+
+
+.allmap-box{ position: fixed;height: 100%;right: 0;top: 0px;overflow: hidden }
+.BMapLabel{ background: none;border: none; }
+.label{ padding: 7px 13px; border: 3px solid #c72479; border-radius: 30px;position: absolute;
+    font-size: 12px;  z-index: 1; bottom: 8px; left: -20px; font-weight: bold;
+    text-align: center; color: #c72479; box-shadow: rgb(205, 204, 204) 3px 4px 3px;
+    white-space: nowrap; display: block; background: rgb(255, 255, 255);}
+.label .text{ display: none }
+.label i{ display: inline-block; width: 12px; height: 8px;
+    position: absolute; bottom: -8px; left: 14px;
+    background: url("../images/11_03.png") no-repeat; }
+.label:hover{
+    box-shadow: rgb(205, 204, 204) 3px 4px 2px;border: 3px solid #69388c;color: #69388c;
+}
+
+.label:hover i{
+    background: url("../images/saojiaos.png") no-repeat
+}
+.label:hover .text{ display: block }
+
+a{ text-decoration: none;color: #646464 }
+#left-box{ width: 400px;position: fixed;height: 100%;left: 0;top: 0px;background: #fff;overflow: auto }
+
+#left-box .text{ margin-top: 10px;background: #f9f7f7;padding: 10px;position: relative;font-size: 12px; }
+#left-box .text .img img{ width: 150px;height: 113px;transition: .5s transform; transform: translateZ(0);  }
+#left-box .text .img{ width: 150px;height: 113px;overflow: hidden; }
+#left-box .text .img img:hover{ transform: scale(1.1, 1.1);transition: .8s transform; }
+
+#left-box .text .txt-box{ width: 200px;margin-left: 10px }
+#left-box .text .txt-box .name{ font-size: 14px;margin: 10px 0;
+    overflow: hidden;text-overflow: ellipsis;display: -webkit-box;
+    -webkit-line-clamp: 3;-webkit-box-orient: vertical; }
+
+#left-box .text .box{ position: absolute;bottom: 10px;width: 200px; }
+#left-box .text .type2{ width: 60px;height: 19px;display: inline-block;text-indent: 10px;color: #fff;
+    line-height: 19px;background: url("../images/mold-bg.png") no-repeat;background-size: 100% 100%;
+}
+
+#left-box .text .type0,#left-box .text .type1{ width: 50px;height: 19px;display: inline-block;text-indent: 10px;color: #fff;
+    line-height: 19px;background: url("../images/mold-bg.png") no-repeat;background-size: 100% 100%;
+}
+
+#left-box .text .rmb{ color: #c72479 }
+#left-box .text .price{ color: #c72479;font-size: 24px;font-style:oblique;padding-right: 5px; }
+
+#left-box .text-no{ font-size: 14px;color: #c72479;padding: 40px 20px; }

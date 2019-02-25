@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>首页</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/media/static/css/index.css">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+
+<section class="housing-box">
+    <div class="tit"><span><a href="{% url 'entire' %}">成都整租房源</a></span></div>
+    <div class="housing">
+         {% for d in house %}
+             <a href="{% url 'entiretext' %}?key={{d.id}}">
+                <div class="left box">
+                    <div class="img"><img src="/media/{{d.imgurl}}" alt=""></div>
+                    <div class="text"><span class="type1">整租</span>{{d.title}}</div>
+                    <div class="">
+                        <div class="left village">{{d.community}}</div>
+                        <div class="right"><span class="rmb">￥</span><span class="price">{{d.rental}}</span>元/月</div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+            </a>
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+    <div class="more"><a href="{% url 'entire' %}"><span>&gt;&gt;&gt;查看更多房源</span></a></div>
+</section>
+
+<section class="life-box">
+    <div class="tit"><span><a href="{% url 'life' %}">成都租房生活</a></span></div>
+    <div class="">
+        {% for d in life %}
+            <a href="{% url 'lifetext' %}?key={{d.id}}">
+                <div class="left box">
+                    <div class="img"><img src="/media/{{d.imgurl}}" alt=""></div>
+                    <div class="text"><div>{{d.title}}</div></div>
+                </div>
+            </a>
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+</section>
+
+<div style="height: 40px;"></div>
+</body>
+<script type="text/javascript" src="/media/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".life-box .box").hover(function(){
+        $(this).find(".text").slideToggle();
+    });
+</script>
+</html>

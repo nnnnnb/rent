@@ -1,0 +1,105 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>租房生活</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/media/static/css/life.css">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+
+<div class="main">
+    <div class="tit"><a href="{% url 'index' %}">首页</a>&nbsp;&gt;&nbsp;<a href="{% url 'life' %}">成都租房生活</a></div>
+    <div class="type-box">
+        <a href="{% url 'life' %}"><div class="left txt {% if getd.tye == '' %}default{% endif %}">最新资讯</div></a>
+        {% for d in typedata %}
+        <a href="{% url 'life' %}?tye={{d.id}}"><div class="left txt {% if getd.tye == d.id %}default{% endif %}">{{d.name}}</div></a>
+        {% endfor %}
+        <div class="right search-box">
+            <form action="{% url 'life' %}">
+                <input type="text" class="left search" name="name" value="{% if getd.name %}{{getd.name}}{% endif %}">
+                <input type="submit" class="left search-btn" value="">
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="content">
+        <div class="left left-box">
+            {% for d in page %}
+            <div class="text">
+                <div class="left img">
+                    <a href="{% url 'lifetext' %}?key={{d.id}}">
+                        <img src="/media/{{d.imgurl}}" alt="">
+                    </a>
+                </div>
+                <div class="left box">
+                    <div class="title">
+                        <a href="{% url 'lifetext' %}?key={{d.id}}">{{d.title}}</a>
+                    </div>
+                    <div class="describe">
+                        <a href="{% url 'lifetext' %}?key={{d.id}}">{{d.keyword}}</a>
+                    </div>
+                    <div class="read">
+                        <div class="left date">{{d.create_time}}</div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            {% endfor %}
+            <div class="clear"></div>
+            {% if page.paginator.num_pages > 1 %}
+            <div class="page">
+                <div>
+                {% for index in pageRange %}
+                    {% if index == page.number %}
+                    <span class="current">{{ index }}</span>
+                    {% else %}
+                    <a class="num" href="{% url 'life' %}?page={{index}}{% if getd.name %}&name={{getd.name}}{% endif %}{% if getd.tye %}&tye={{getd.tye}}{% endif %}">{{ index }}</a>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+    
+        </div>
+
+        <div class="right right-box">
+            <div class="new">
+                <div class="tits">热门文章</div>
+                {% for d in reclife %}
+                <a href="{% url 'lifetext' %}?key={{d.id}}">
+                    <div class="txt-box">
+                        <div class="img-box">
+                            <div class="img">
+                                <img src="/media/{{d.imgurl}}" alt="">
+                                <span>{{forloop.counter}}</span>
+                            </div>
+                        </div>
+                        <div class="txt">{{d.title}}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/media/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(window).scroll(function () {
+        if( $(window).scrollTop() == 0 ){
+            $(".main .type-box").css({position:"relative",top: "0px"})
+        }else{
+            $(".main .type-box").css({position:"fixed",top: "0px"})
+        }
+    });
+</script>
+</html>

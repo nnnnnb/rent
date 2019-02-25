@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>立即找房</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/media/static/css/entire.css">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <style>
+        .search-box .joint-box .entire-btn{ height: 40px;border: 1px #e0e0e0 solid;border-bottom: 0; }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="tit"><a href="{% url 'index' %}">首页</a>&nbsp;&gt;&nbsp;<a href="{% url 'entire' %}">立即找房</a></div>
+</div>
+<div class="content">
+    <div class="content-box">
+        <div class="search-box">
+            <div class="joint-box">
+                <a href="{% url 'entire' %}"><span class="entire-btn" style="color: #c72479">成都整租房源</span></a>
+                <a href="{% url 'maps' %}"><span class="map-btn">成都地图找房</span></a>
+            </div>
+<div class="nav">
+<span>区域：</span>
+<a href="{% url 'entire' %}?reg={% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}">
+<span class="{% if getd.reg == '' %}default{% endif %}">不限</span></a>
+{% for d in reg_data %}
+<a href="{% url 'entire' %}?reg={{d.id}}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}">
+<span class="{% if getd.reg == d.id %}default{% endif %}">{{d.name}}</span></a>
+{% endfor %}
+{% if blo_data %}
+<div class="plate">
+<a href="{% url 'entire' %}?blo={% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}">
+<span class="{% if getd.blo == '' %}default{% endif %}">不限</span></a>
+{% for d in blo_data %}
+<a href="{% url 'entire' %}?blo={{d.id}}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}">
+<span class="{% if getd.blo == d.id %}default{% endif %}">{{d.name}}</span></a>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+           
+<div class="nav"><span>套型：</span>
+<a href="{% url 'entire' %}?bed={% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.bed == '' %}default{% endif %}">不限</span></a>
+<a href="{% url 'entire' %}?bed=1{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.bed == 1 %}default{% endif %}">一居</span></a>
+<a href="{% url 'entire' %}?bed=2{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.bed == 2 %}default{% endif %}">二居</span></a>
+<a href="{% url 'entire' %}?bed=3{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.bed == 3 %}default{% endif %}">三居</span></a>
+</div>
+
+<div class="nav">
+<span>交通：</span>
+<a href="{% url 'entire' %}?tra={% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}">
+<span class="{% if getd.tra == '' %}default{% endif %}">不限</span></a>
+{% for d in tra_data %}
+<a href="{% url 'entire' %}?tra={{d.id}}{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}">
+<span class="{% if getd.tra == d.id %}default{% endif %}">{{d.name}}</span></a>
+{% endfor %}
+</div>
+
+<div class="nav"><span>价格：</span>
+<a href="{% url 'entire' %}?ren={% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.ren == '' %}default{% endif %}">不限</span></a>
+<a href="{% url 'entire' %}?ren=1{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.ren == 1 %}default{% endif %}">0-1499</span></a>
+<a href="{% url 'entire' %}?ren=2{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.ren == 2 %}default{% endif %}">1500-1999</span></a>
+<a href="{% url 'entire' %}?ren=3{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}"><span class="{% if getd.ren == 3 %}default{% endif %}">2000以上</span></a>
+</div>
+
+<div class="nav"><span>排序：</span>
+<a href="{% url 'entire' %}?sort={% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}"><span class="{% if getd.sort == '' %}default{% endif %}">推荐排序</span></a>
+<a href="{% url 'entire' %}?sort=1{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}"><span class="{% if getd.sort == 1 %}default{% endif %}">按上线时间</span></a>
+<a href="{% url 'entire' %}?sort=2{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}"><span class="{% if getd.sort == 2 %}default{% endif %}">价格从低到高</span></a>
+<a href="{% url 'entire' %}?sort=3{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}"><span class="{% if getd.sort == 3 %}default{% endif %}">价格从高到底</span></a>
+</div>
+            <div class="search-form">
+                <form  method = "get"  action = "{% url 'entire' %}" >
+                    <input type="text" value="{{getd.name}}" class="search" name="name" placeholder="请输入区域、商圈、小区名称" >
+                    <input type="submit" class="search-btn" value="搜 索">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    {% for d in page %}
+    <a href="{% url 'entiretext' %}?key={{d.id}}">
+        <div class="text">
+            <div class="left img">
+                <img src="/media/{{d.imgurl}}" alt="">
+            </div>
+            <div class="left txt-box">
+                <div class="name">{{d.title}}</div>
+                <div class="keyword">{% if d.keyword %}{{d.keyword}}{% endif %}</div>
+                <div class="box">
+                    <div class="left">
+                        <div class="">
+                            {% for i in d.many %}<span class="tra">{{i}}</span>{% endfor %}
+                        </div>
+                        <div class="village">{{d.community}}</div>
+                    </div>
+                    <div class="right"><span class="rmb">￥</span><span class="price">{{d.rental}}</span>元/月</div>
+
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </a>
+    {% endfor %}
+
+    {% if page.paginator.num_pages > 1 %}
+    <div class="page">
+        <div>
+        {% for index in pageRange %}
+            {% if index == page.number %}
+            <span class="current">{{ index }}</span>
+            {% else %}
+            <a class="num" href="{% url 'entire' %}?page={{index}}{% if getd.reg %}&reg={{getd.reg}}{% endif %}{% if getd.blo %}&blo={{getd.blo}}{% endif %}{% if getd.tra %}&tra={{getd.tra}}{% endif %}{% if getd.bed %}&bed={{getd.bed}}{% endif %}{% if getd.ren %}&ren={{getd.ren}}{% endif %}{% if getd.sort %}&sort={{getd.sort}}{% endif %}{% if getd.name %}&name={{getd.name}}{% endif %}">{{ index }}</a>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+</body>
+
+</html>

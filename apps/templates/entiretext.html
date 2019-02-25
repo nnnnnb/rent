@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{{data.title}}</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/media/static/css/entiretext.css">
+    <link rel="stylesheet" type="text/css" href="/media/static/css/jquery.ad-gallery.css">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+<div id="bg"></div>
+
+
+
+<div class="main">
+    <div class="tit"><a href="{% url 'index' %}">首页</a>&nbsp;&gt;&nbsp;
+        <a href="{% url 'entire' %}">立即找房</a>&nbsp;&gt;&nbsp;
+        <a href="">{{data.title}}</a></div>
+</div>
+
+<div class="content">
+    <div class="box">
+        <div class="left">
+            <div class="details">
+                <div class="ad-gallery">
+                    <div class="ad-image-wrapper">
+                    </div>
+                    <div class="ad-nav">
+                        <div class="ad-thumbs">
+                            <ul class="ad-thumb-list">
+                                {% for d in houseimg %}
+                                <li>
+                                    <a href="/media/{{d.imgurl}}">
+                                        <img src="/media/{{d.imgurl}}" >
+                                    </a>
+                                </li>
+                                {% endfor %}
+                               </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="left text-box">
+            <div class="name">{{data.title}}</div>
+            <div class="keyword">{% if data.keyword %}{{data.keyword}}{% endif %}</div>
+            <div class="number">{% if data.number %}{{data.number}}{% endif %}</div>
+            <div class="region">{{regiondata.name}} - {{blockdata.name}}</div>
+            <div class="addr">{{communitydata.address}}</div>
+            <div class="unit">{{data.storey_total}}层</div>
+            <div class="bedroom">{{data.bedroom}}室{{data.livingroom}}厅{{data.toilet}}卫</div>
+            <div class="area">{{data.acreage}}㎡</div>
+
+            <div class="rent"><span class="rmb">￥</span><span class="price">{{data.rental}}</span>元/月</div>
+            <div class="tel">{{data.phone}}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+{% if facdata %}
+<div class="mating-box">
+    <div class="tit">房屋配置</div>
+    <div class="hr-border"></div>
+    <div class="mating">
+        {% for d in facdata %}  
+        <div class="left">
+            <img src="/media/{{d.imgurl}}" alt="">
+            <div class="txt">{{d.name}}</div>
+        </div>
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+</div>
+{% endif %}
+
+{% if houseimg %}
+<div class="picture-box">
+    <div class="tit">房间照片</div>
+    <div class="hr-border"></div>
+    {% for d in houseimg %}          
+    <div class="img">
+        <img src="/media/{{d.imgurl}}">
+    </div>
+    <div class="name">
+        <span>&lt;&nbsp;{{d.name}}&nbsp;&gt;</span>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="map-box">
+    <div class="tit">周边配套</div>
+    <div class="hr-border"></div>
+    <div id="allmap"></div>
+    <div class="map-list">
+        <div class="left def" onclick='maps(0,"公交")'>交通</div>
+        <div class="left" onclick='maps(1,"学校")'>教育</div>
+        <div class="left" onclick='maps(2,"医院")'>医疗</div>
+        <div class="left" onclick='maps(3,"餐饮")'>餐饮</div>
+        <div class="left" onclick='maps(4,"超市")'>购物</div>
+        <div class="left" onclick='maps(5,"公园")'>环境</div>
+        <div class="clear"></div>
+    </div>
+    <div id="result-box"></div>
+</div>
+
+</body>
+<script type="text/javascript" src="/media/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xnUzaZ8bBFFK6rGmLLxD5nIXoPonTG5w"></script>
+<script type="text/javascript" src="/media/static/js/jquery.ad-gallery.js"></script>
+<script type="text/javascript" src="/media/static/js/zzsc.js"></script>
+<script type="text/javascript">
+    $(".map-list .left").click(function(){
+        $(".map-list .left").removeClass("def");
+        $(this).addClass("def");
+    });
+    var map = new BMap.Map("allmap");
+    var mPoint = new BMap.Point({{communitydata.lon}},{{communitydata.lat}});
+    map.enableScrollWheelZoom();
+    map.centerAndZoom(mPoint,20);
+
+    var circle = new BMap.Circle(mPoint,1000,{strokeWeight: 1 ,fillOpacity: 0.1, strokeOpacity: 0.1});
+    map.addOverlay(circle);
+
+    maps(0,"公交");
+    function maps(t,myKeys){
+        map.clearOverlays();
+        var marker = new BMap.Marker(mPoint);  // 创建标注
+        map.addOverlay(marker);               // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+        var local = new BMap.LocalSearch(map, {
+            renderOptions: {map: map},
+            onSearchComplete: function(results){
+                // 判断状态是否正确
+                $("#result-box").empty();
+                if (local.getStatus() == BMAP_STATUS_SUCCESS){
+                    var html;
+                    for (var i = 0; i < results.getCurrentNumPois(); i ++){
+                        var lat = results.getPoi(i).point.lat;
+                        var lng = results.getPoi(i).point.lng;
+                        var tit = results.getPoi(i).title;
+                        var address = results.getPoi(i).address ;
+                        var phoneNumber = results.getPoi(i).phoneNumber;
+                        html='<div class="list-box" data-tit="'+tit+'" data-adds="'+address+'" data-tel="'+phoneNumber+'" id="pos'+t+''+i+'" onclick=infoWindow("'+lat+'","'+lng+'","'+t+'","'+i+'")>';
+                        html+='<div class="left titles">'+tit+'</div>';
+                        if( address ) {
+                            html += '<div class="left address">'+address+'</div>';
+                        }
+                        if( phoneNumber ){
+                            html+='<div class="left phoneNumber">'+phoneNumber+'</div>';
+                        }
+                        html+='<div class="clear"></div>';
+                        html+='</div>';
+                        $("#result-box").append(html);
+                    }
+                }
+            }
+        });
+        local.searchNearby(myKeys,mPoint,1000);
+    }
+    function infoWindow(lat,lng,t,i){
+        var tit = $("#pos"+t+""+i+"").attr( "data-tit" );
+        var adds = $("#pos"+t+""+i+"").attr( "data-adds" );
+        var tel = $("#pos"+t+""+i+"").attr( "data-tel" );
+        var content = "";
+        if( adds != null ){
+            content += adds;
+        }
+        if( tel != "undefined" ){
+            content += "<br/>"+tel;
+        }
+        var point = new BMap.Point(lng,lat);
+        var opts = {
+            width : 200,     // 信息窗口宽度
+            height: 100,     // 信息窗口高度
+            title : tit , // 信息窗口标题
+            enableMessage:true,//设置允许信息窗发送短息
+            message:""
+        };
+        var infoWindow = new BMap.InfoWindow( content, opts);
+        map.openInfoWindow(infoWindow,point); //开启信息窗口
+    }
+</script>

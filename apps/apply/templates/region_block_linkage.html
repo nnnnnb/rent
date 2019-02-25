@@ -1,0 +1,45 @@
+{% extends "admin/change_form.html" %}
+{% block extrahead %}{{ block.super }}
+    <script>
+        django.jQuery(function() {
+
+            var select = django.jQuery("#id_region");
+            var sid = select.val();
+            if ( !sid ){
+                ajax_region_block_linkage(1);
+            }else{
+                ajax_region_block_linkage(sid);
+            }
+            // console.log(select);
+            select.change(function(){
+                ajax_region_block_linkage(django.jQuery(this).val());
+            });
+
+
+        });
+        function ajax_region_block_linkage(n) {
+            var url = "/admin/apply/ajax_region_block_linkage/"+n;
+                //能够正确的访问到view的u额l
+                django.jQuery.get(url, function(data){
+                    var target = django.jQuery("#id_block");
+                    var block = target.val();
+                    target.empty();//先要清空一下
+                    target.append("<option value=''>---------<option>");
+                    var html = '';
+                    data.forEach(function(e){
+                        // 将从view得到的id和db_user名称赋值给db_server的select
+                        html += "<option value='"+e.id+"'>"+e.name+"<option>";
+                    });
+                    target.append(html);
+                    for ( var i=0;i < target.find('option').length;i++ ){
+                        var txt = target.find('option:eq('+i+')');
+                        if( !txt.text() ){
+                            txt.remove();
+                        }
+                    }
+                    target.find('option[value="'+block+'"]').attr('selected',true);
+
+                })
+        }
+    </script>
+{% endblock %}

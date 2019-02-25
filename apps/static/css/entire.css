@@ -1,0 +1,95 @@
+*{ margin: 0;padding: 0 }
+.left{ float: left }
+.right{ float: right }
+.clear{ clear: both }
+
+::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+    background-color: #ededed;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ededed;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #666464;
+}
+
+
+#header .def.joint{ background: rgba(220,220,220,.6);border-radius: 10px;border: 1px #dcdcdd solid; }
+
+a{ text-decoration: none;color: #666464 }
+.content{ background: #f9f9f9 }
+.content-box,.main{ width: 1000px;margin: 0 auto;color: #7b7b7b;font-size: 12px; }
+.main .tit{ padding: 15px 0; }
+
+
+.content-box{ padding-top: 60px;padding-bottom: 20px; }
+.search-box{ border: 1px #e0e0e0 solid;padding: 10px 20px 30px 20px;position: relative;border-top: 0;background: #fff; }
+.search-box .joint-box{ position: absolute;top: -40px;height: 40px;font-size: 14px;width: 100%; left: -1px;
+    border-bottom: 1px #e0e0e0 solid;border-left: 1px #e0e0e0 solid; }
+.search-box .joint-box .joint-btn,.search-box .joint-box .cent-btn
+,.search-box .joint-box .map-btn,.search-box .joint-box .entire-btn{
+    display: inline-block;width: 150px;text-align: center;line-height: 40px;background: #fff;
+}
+
+.search-box .joint-box .map-btn{ height: 39px;border: 1px #e0e0e0 solid;border-bottom: 0; }
+.search-box .nav a{ margin-left: 10px; }
+.search-box .nav{ padding: 10px 0; }
+.search-box .default{ color: #fff;background: #c72479; }
+.search-box .plate{ border: 1px #e0e0e0 solid;padding: 5px;margin-top: 10px; }
+.search-box .nav span{ padding: 0;background: none; }
+.search-box .nav span.default{ padding: 0;background: none;color: #c72479; }
+.search-box .nav span:hover{ color: #c72479;text-decoration:underline; }
+.search-form{ margin-top: 15px }
+.search-form input{ padding: 0 10px;border-radius: 10px;  }
+.search-form input.search:focus{ outline:none;border-radius: 10px;box-shadow: 0 0 5px #69388c;
+    border:1px solid #e0e0e0 }
+.search-form .search{ width: 500px;height: 35px;font-size: 12px;border: 1px #e0e0e0 solid;background: #f0f0f0; }
+.search-form .search-btn{ width: 100px;height: 37px;background: #69388c;color: #fff;
+    font-size: 14px;cursor:pointer ;border: 0; }
+.search-form input.search-btn:focus{ outline:none; }
+
+
+.deploy{ display: inline-block; width: 12px;height: 12px;  border-radius: 2px;border: 1px solid #c72479;background: #c72479;
+    box-sizing: border-box;position: relative;left: 3px;vertical-align:-2px; margin-right: 5px;}
+.deploy1{ display: inline-block; width: 12px;height: 12px;  border-radius: 2px;margin-right: 5px;
+    border: 1px solid #555; box-sizing: border-box;position: relative;left: 3px;vertical-align:-2px; }
+
+.text{ margin: 10px 0;background: #f6f6f6;padding: 10px;position: relative }
+.text .img img{ width: 340px;height: 255px;transition: .5s transform; transform: translateZ(0);  }
+.text .img{ width: 340px;height: 255px;overflow: hidden; }
+.text .img img:hover{ transform: scale(1.1, 1.1);transition: .8s transform; }
+
+.text .txt-box{ width: 610px;margin-left: 25px }
+.text .txt-box .name{ font-size: 14px;margin: 15px 0;font-weight: bold }
+.text .txt-box .keyword{ font-size: 12px;padding-top: 15px;border-top: 1px #666464 dashed }
+.text .box{ position: absolute;bottom: 10px;width: 610px; }
+.text .type2{ width: 60px;height: 19px;display: inline-block;color: #fff;text-indent: 10px;
+    line-height: 19px;background: url("../images/mold-bg.png") no-repeat;background-size: 100% 100%;
+}
+.text .type0,.text .type1{ width: 50px;height: 19px;display: inline-block;color: #fff;text-indent: 10px;
+    line-height: 19px;background: url("../images/mold-bg.png") no-repeat;background-size: 100% 100%;
+}
+.text .tra{ background: #c72479 url("../images/tra.png") no-repeat;background-position: 10px center;padding:  4px 10px 4px 25px;
+    color: #fff;background-size: 12px;margin-right: 20px;border-radius: 10px; }
+.text .village{ background: url("../images/village.png") no-repeat;background-position:left center;background-size: 18px;
+    padding-left: 20px; margin-top: 10px; }
+.text .rmb{ color: #c72479 }
+.text .price{ color: #c72479;font-size: 36px;font-style:oblique;padding-right: 5px; }
+
+
+.page{ height: 60px;line-height: 60px;text-align: center; }
+.page .current { padding: 4px 10px;border: 1px #c72479 solid;color: #c72479;border-radius: 3px;margin: 0 5px;}
+.page a { padding: 4px 10px;border: 1px #666464 solid;margin: 0 5px;border-radius: 3px;}
